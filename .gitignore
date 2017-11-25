@@ -3,5 +3,3 @@
 build
 node_modules
 *.log
-.babelrc
-CODE_OF_CONDUCT.md
