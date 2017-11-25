@@ -1,0 +1,160 @@
+@import "../../styles/colors";
+@import "../../styles/vars";
+
+$primary-background-color: $dark-cyan;
+$primary-color: $white;
+$primary-background-hover-color: $white;
+$primary-hover-color: $dark-cyan;
+
+$secondary-background-color: $white;
+$secondary-color: $elm;
+$secondary-background-hover-color: $dark-cyan;
+$secondary-hover-color: $white;
+
+$ghost-hover-color: $sherpa-blue;
+$ghost-background-hover-color: $white;
+
+$gradient-fill-text-color: $white;
+
+$gradient-hover-color: $white;
+
+.button {
+  font-weight: 400;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 12px;
+  user-select: none;
+  width: 100%;
+  text-transform: uppercase;
+  position: relative;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: .65;
+    filter: alpha(opacity=65);
+    box-shadow: none;
+  }
+
+  &--primary {
+    background-color: $primary-background-color;
+    color: $primary-color;
+
+    &:active {
+      outline: 0;
+      background-image: none;
+      box-shadow: inset 0 3px 5px $primary-background-color;
+    }
+
+    &:hover {
+      background-color: $primary-background-hover-color;
+      color: $primary-hover-color;
+    }
+  }
+
+  &--secondary {
+    border-radius: 2px;
+    background-color: $secondary-background-color;
+    color: $secondary-color;
+
+    &:hover {
+      color: $secondary-hover-color;
+      background-color: $secondary-background-hover-color;
+    }
+  }
+
+  &--ghost {
+    color: $primary-color;
+    background-color: transparent;
+    border: 2px solid $primary-color;
+
+    &:hover {
+      background-color: $ghost-background-hover-color;
+      color: $ghost-hover-color;
+    }
+  }
+
+  &--gradient {
+    position: relative;
+    z-index: 0;
+    border: 0;
+
+    &::before,
+    &::after {
+      @include pseudo;
+      top: 0; right: 0; bottom: 0; left: 0;
+    }
+
+    &::before {
+      z-index: -2;
+      transition: opacity .2s ease-out;
+      background-image: linear-gradient(
+        to right,
+        $gradient-1 0%,
+        $gradient-2 44%,
+        $gradient-3 54%,
+        $gradient-4 100%
+      );
+    }
+
+    &::after {
+      z-index: -1;
+      margin: 2px;
+      background-color: #FFF;
+    }
+
+    &:hover {
+      color: $gradient-hover-color;
+      background-image: linear-gradient(to right, $start-gradient-color, $end-gradient-color);
+
+      &::after {
+        content: none;
+      }
+    }
+  }
+
+  &--gradient-fill {
+    background-image: linear-gradient(to right, $start-gradient-color, $end-gradient-color);
+    color: $gradient-fill-text-color;
+
+    &:hover {
+      * {
+        @include gradient-text();
+      }
+
+      position: relative;
+      z-index: 0;
+      border: 0;
+
+      &::before,
+      &::after {
+        @include pseudo;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+
+      &::before {
+        z-index: -2;
+        transition: opacity .2s ease-out;
+        background-image: linear-gradient(
+          to right,
+          $gradient-1 0%,
+          $gradient-2 44%,
+          $gradient-3 54%,
+          $gradient-4 100%
+        );
+      }
+
+      &::after {
+        z-index: -1;
+        margin: 2px;
+        background-color: #FFF;
+      }
+    }
+  }
+}

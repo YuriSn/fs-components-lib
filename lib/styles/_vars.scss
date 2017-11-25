@@ -1,0 +1,120 @@
+@import "./colors";
+
+//----------GRADIENT-COLORS-------
+$start-gradient-color: $dark-cyan;
+$end-gradient-color: $mantis;
+$gradient-1: $start-gradient-color;
+$gradient-2: #1D8B82;
+$gradient-3: #258F7E;
+$gradient-4: $end-gradient-color;
+//--------------------------------
+
+$transparent-start-gradient-color: rgba(22, 136, 135, 0.3);
+$transparent-end-gradient-color: rgba(147, 211, 99, 0.3);
+
+$text-secondary-color: $gray;
+$btn-text-color: $dark-cyan;
+
+//----------MEDIA QUERIES WIDTH-------
+$phone-width: 320px;
+$tablet-width: 768px;
+$medium-screen-width: 1440px;
+//------------------------------------
+
+$header-height: 80px;
+$rotate-jet-icon-coefficient: 15deg;
+$hero-height: calc(100vh - #{$header-height});
+
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+.secondary-text-base {
+  color: $text-secondary-color;
+  line-height: 1.6;
+  text-align: center;
+  font-size: 18px;
+  max-width: 600px;
+}
+
+.hero-button {
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 205px;
+  letter-spacing: 1px;
+  height: 55px;
+}
+
+@mixin styled-checkbox($checked-url, $unchecked-url) {
+  position: absolute;
+  opacity: 0;
+
+  & + label {
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  // Box
+  & + label:before {
+    content: "";
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: top;
+    width: 20px;
+    height: 20px;
+    background-image: url($unchecked-url);
+  }
+
+  // Box checked
+  &:checked + label:before {
+    background-image: url($checked-url);
+  }
+}
+
+@mixin gradient-text($reverse: false) {
+  color: $btn-text-color;
+  @if ($reverse) {
+    background-image: linear-gradient(to right, $end-gradient-color, $start-gradient-color);
+  } @else {
+    background-image: linear-gradient(to right, $start-gradient-color, $end-gradient-color);
+  }
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@mixin phone {
+  @media (min-width: #{$phone-width}) and (max-width: #{$tablet-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: #{$tablet-width}) and (max-width: #{$medium-screen-width - 1px}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media (min-width: #{$medium-screen-width}) {
+    @content;
+  }
+}
+
+@mixin to-tablet {
+  @media (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin to-medium {
+  @media (max-width: #{$medium-screen-width - 1px}) {
+    @content;
+  }
+}
+
